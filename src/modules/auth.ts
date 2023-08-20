@@ -33,7 +33,7 @@ export const protect = (req,res,next)=>{
         return;
     }
 
-    const [,token] = bearer.split(" ");
+    const [, token] = bearer.split(' ');
     if(!token)
     {
         res.status(401);
@@ -43,7 +43,7 @@ export const protect = (req,res,next)=>{
 
     try 
     {
-        const user = jwt.verify(token,process.env.JWT_SECRECT);
+        const user = jwt.verify(token,process.env.JWT_SECRET);
         req.user = user;
         next();
     }
