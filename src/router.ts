@@ -1,21 +1,18 @@
 import {Router} from 'express';
 import { body, oneOf, validationResult } from 'express-validator';
 import { hanldeErrors } from './modules/middleware';
+import { getOneProduct, getProducts,createProduct, deleteProduct, updateProduct } from './handlers/product';
 
 const router = Router();
 
 /**
  * Product
  */
-router.get('/product',(req,res)=>{
-    res.json({message:req.secrect});
-});
-router.get('/product/:id',()=>{});
-router.post('/product',body('name').isString(),hanldeErrors,(req,res)=>{
-    
-});
-router.put('/product/:id',body('name').isString(),hanldeErrors,()=>{});
-router.delete('/product/:id',()=>{});
+router.get('/product',getProducts);
+router.get('/product/:id',getOneProduct);
+router.post('/product',body('name').isString(),hanldeErrors,createProduct);
+router.put('/product/:id',body('name').isString(),hanldeErrors,updateProduct);
+router.delete('/product/:id',deleteProduct);
 
 /**
  * Upadte
