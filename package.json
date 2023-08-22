@@ -9,6 +9,9 @@
     "build": "tsc -p tsconfig.json",
     "dev": "ts-node src/index.ts"
   },
+  "engines": {
+    "node": ">=14  <18"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
