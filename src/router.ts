@@ -2,7 +2,7 @@ import {Router} from 'express';
 import { body, oneOf, validationResult } from 'express-validator';
 import { hanldeErrors } from './modules/middleware';
 import { getOneProduct, getProducts,createProduct, deleteProduct, updateProduct } from './handlers/product';
-import { createUpdate, deleteUpdate, getOneUpdates, getUpdates, updateUpdate } from './handlers/update';
+import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from './handlers/update';
 
 const router = Router();
 
@@ -19,21 +19,21 @@ router.delete('/product/:id',deleteProduct);
  * Upadte
  */
 router.get('/update',getUpdates);
-router.get('update/:id',getOneUpdates);
+router.get('/update/:id',getOneUpdate);
 router.post('/update',
 body('title').exists().isString(),
 body('body').exists().isString(),
 body('productId').exists().isString(),
 createUpdate
 );
-router.put('update/:id',
+router.put('/update/:id',
 body('title').optional(),
 body('body').optional(),
 body('status').isIn(['IN_PROGRESS','SHIPPED','DEPRICATED']).optional(),
-body('version').optional,
+body('version').optional(),
 updateUpdate
 );
-router.delete('update/:id',deleteUpdate);
+router.delete('/update/:id',deleteUpdate);
 
 /**
  * Upadte Point
@@ -50,5 +50,10 @@ body('name').optional().isString(),
 body('description').optional().isString(),
 ()=>{});
 router.delete('/updatepoint/:id',()=>{});
+
+router.use((err,req,res,next)=>{
+    console.log(err);
+    res.json({message:"router handler"});
+})
 
 export default router;
