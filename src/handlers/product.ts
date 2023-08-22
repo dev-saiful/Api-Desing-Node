@@ -29,7 +29,7 @@ export const getOneProduct = async(req,res)=>{
 
 // Create product
 export const createProduct = async(req,res,next)=>{
-    try {
+ 
         const product = await prisma.product.create({
             data:{
                 belongsToId:req.user.id,
@@ -39,9 +39,6 @@ export const createProduct = async(req,res,next)=>{
         });
     
         res.json({data:product});
-    } catch (e) {
-        next(e);
-    }
 
 }
 
